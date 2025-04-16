@@ -1,14 +1,21 @@
 async function fetchCryptoPrices() {
     try {
         console.log("Solicitando datos a la API...");
-        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,dogecoin,litecoin,bitcoin-cash,dash,digibyte,tron,tether,feyorra,zcash,binancecoin,solana,ripple,matic-network,the-open-network,usd-coin,monero,taraxa,pepe,official-trump&vs_currencies=usd');
-        if (!response.ok) {
-            throw new Error(`Error en la solicitud: ${response.status}`);
-        }
-        console.log("Respuesta recibida de la API.");
-        const data = await response.json();
-        console.log("Datos obtenidos:", data);
-        return data; // Retorna los precios de todas las criptomonedas
+
+        // Primera solicitud (Grupo 1)
+        const response1 = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,dogecoin,litecoin,bitcoin-cash,dash,digibyte,tron,tether,feyorra,zcash,binancecoin&vs_currencies=usd');
+        if (!response1.ok) throw new Error(`Error en la solicitud 1: ${response1.status}`);
+        const data1 = await response1.json();
+
+        // Segunda solicitud (Grupo 2)
+        const response2 = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana,ripple,matic-network,the-open-network,usd-coin,monero,taraxa,pepe,official-trump,cardano,stellar&vs_currencies=usd');
+        if (!response2.ok) throw new Error(`Error en la solicitud 2: ${response2.status}`);
+        const data2 = await response2.json();
+
+        // Combinar los resultados
+        const combinedData = { ...data1, ...data2 };
+        console.log("Datos obtenidos:", combinedData);
+        return combinedData;
     } catch (error) {
         console.error('Error al obtener los precios:', error);
         return null;
@@ -43,6 +50,7 @@ async function updatePrices() {
         document.getElementById('pepe-price').textContent = `Pepe (PEPE): USD ${prices.pepe.usd}`;
         document.getElementById('official-trump-price').textContent = `Official Trump (TRUMP): USD ${prices['official-trump'].usd}`;
     } else {
+        // Mostrar mensajes de error si no se obtienen los precios
         document.getElementById('bitcoin-price').textContent = "Bitcoin (BTC): Error al cargar el precio";
         document.getElementById('ethereum-price').textContent = "Ethereum (ETH): Error al cargar el precio";
         document.getElementById('dogecoin-price').textContent = "Dogecoin (DOGE): Error al cargar el precio";
