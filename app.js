@@ -1,3 +1,33 @@
+// Contraseña cifrada (usa la contraseña segura proporcionada anteriormente)
+const encryptedPassword = btoa("Cryp70M0n3y@2023!"); // Contraseña cifrada
+
+// Verificar si hay una sesión activa en localStorage
+let isLoggedIn = localStorage.getItem("isLoggedIn");
+
+if (isLoggedIn === "true") {
+    // Si hay una sesión activa, mostrar el contenido directamente
+    document.getElementById('password-form').style.display = 'none';
+    document.getElementById('app-content').style.display = 'block';
+    updatePrices();
+}
+
+function checkPassword() {
+    const passwordInput = document.getElementById('password-input').value;
+    const errorMessage = document.getElementById('error-message');
+
+    // Comparar la contraseña ingresada con la contraseña cifrada
+    if (btoa(passwordInput) === encryptedPassword) {
+        // Contraseña correcta: Guardar la sesión y mostrar el contenido
+        localStorage.setItem("isLoggedIn", "true");
+        document.getElementById('password-form').style.display = 'none';
+        document.getElementById('app-content').style.display = 'block';
+        updatePrices();
+    } else {
+        // Contraseña incorrecta: Mostrar mensaje de error
+        errorMessage.textContent = "Contraseña incorrecta. Inténtalo de nuevo.";
+    }
+}
+
 async function fetchCryptoPrices() {
     try {
         console.log("Solicitando datos a la API...");
