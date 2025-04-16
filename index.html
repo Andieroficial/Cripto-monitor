@@ -22,10 +22,6 @@
         #app-content {
             display: none; /* Ocultar el contenido hasta que se ingrese la contraseña */
         }
-        #change-password-section {
-            margin-top: 20px;
-            display: none; /* Ocultar esta sección inicialmente */
-        }
     </style>
 </head>
 <body>
@@ -64,71 +60,8 @@
         <p id="taraxa-price" class="crypto-price">Taraxa (TARA): Cargando...</p>
         <p id="pepe-price" class="crypto-price">Pepe (PEPE): Cargando...</p>
         <p id="official-trump-price" class="crypto-price">Official Trump (TRUMP): Cargando...</p>
-
-        <!-- Sección para cambiar la contraseña -->
-        <div id="change-password-section">
-            <h3>Cambiar Contraseña</h3>
-            <input type="password" id="new-password-input" placeholder="Nueva contraseña">
-            <button onclick="changePassword()">Guardar Nueva Contraseña</button>
-            <p id="password-change-message"></p>
-        </div>
     </div>
 
     <script src="app.js"></script>
-    <script>
-        // Obtener la contraseña cifrada desde localStorage (si existe)
-        let encryptedPassword = localStorage.getItem("encryptedPassword");
-
-        // Si no hay contraseña configurada, usar una predeterminada
-        if (!encryptedPassword) {
-            encryptedPassword = btoa("contraseña_predeterminada"); // Contraseña inicial predeterminada
-            localStorage.setItem("encryptedPassword", encryptedPassword);
-        }
-
-        function checkPassword() {
-            const passwordInput = document.getElementById('password-input').value;
-            const errorMessage = document.getElementById('error-message');
-
-            // Decodificar la contraseña ingresada y compararla
-            if (btoa(passwordInput) === encryptedPassword) {
-                // Contraseña correcta: Mostrar el contenido y ocultar el formulario
-                document.getElementById('password-form').style.display = 'none';
-                document.getElementById('app-content').style.display = 'block';
-
-                // Iniciar la actualización de precios
-                updatePrices();
-            } else {
-                // Contraseña incorrecta: Mostrar mensaje de error
-                errorMessage.textContent = "Contraseña incorrecta. Inténtalo de nuevo.";
-            }
-        }
-
-        function changePassword() {
-            const newPasswordInput = document.getElementById('new-password-input').value;
-            const passwordChangeMessage = document.getElementById('password-change-message');
-
-            if (newPasswordInput.trim() === "") {
-                passwordChangeMessage.textContent = "La nueva contraseña no puede estar vacía.";
-                passwordChangeMessage.style.color = "red";
-                return;
-            }
-
-            // Cifrar la nueva contraseña y guardarla en localStorage
-            const newEncryptedPassword = btoa(newPasswordInput);
-            localStorage.setItem("encryptedPassword", newEncryptedPassword);
-
-            // Actualizar la contraseña cifrada en memoria
-            encryptedPassword = newEncryptedPassword;
-
-            // Mostrar mensaje de éxito
-            passwordChangeMessage.textContent = "Contraseña cambiada exitosamente.";
-            passwordChangeMessage.style.color = "green";
-        }
-
-        // Mostrar la sección de cambio de contraseña solo si se ha iniciado sesión
-        document.getElementById('app-content').addEventListener('click', () => {
-            document.getElementById('change-password-section').style.display = 'block';
-        });
-    </script>
 </body>
 </html>
