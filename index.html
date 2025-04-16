@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monitoreo de Criptomonedas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .crypto-price {
+            font-size: 18px;
+            color: #007BFF;
+            margin: 5px 0;
+        }
+        #password-form {
+            margin-bottom: 20px;
+        }
+        #app-content {
+            display: none; /* Ocultar el contenido hasta que se ingrese la contraseña */
+        }
+    </style>
+</head>
+<body>
+    <!-- Formulario de contraseña -->
+    <div id="password-form">
+        <h2>Acceso Restringido</h2>
+        <p>Por favor, ingresa la contraseña para ver el contenido:</p>
+        <input type="password" id="password-input" placeholder="Contraseña">
+        <button onclick="checkPassword()">Ingresar</button>
+        <p id="error-message" style="color: red;"></p>
+    </div>
+
+    <!-- Contenido de la app (oculto inicialmente) -->
+    <div id="app-content">
+        <h1>Precios de Criptomonedas</h1>
+        <p id="bitcoin-price" class="crypto-price">Bitcoin (BTC): Cargando...</p>
+        <p id="ethereum-price" class="crypto-price">Ethereum (ETH): Cargando...</p>
+        <p id="dogecoin-price" class="crypto-price">Dogecoin (DOGE): Cargando...</p>
+        <p id="litecoin-price" class="crypto-price">Litecoin (LTC): Cargando...</p>
+        <p id="bitcoincash-price" class="crypto-price">Bitcoin Cash (BCH): Cargando...</p>
+        <p id="dash-price" class="crypto-price">Dash (DASH): Cargando...</p>
+        <p id="digibyte-price" class="crypto-price">DigiByte (DGB): Cargando...</p>
+        <p id="tron-price" class="crypto-price">Tron (TRX): Cargando...</p>
+        <p id="tether-price" class="crypto-price">Tether (USDT): Cargando...</p>
+        <p id="feyorra-price" class="crypto-price">Feyorra (FEY): Cargando...</p>
+        <p id="zcash-price" class="crypto-price">Zcash (ZEC): Cargando...</p>
+        <p id="binancecoin-price" class="crypto-price">Binance Coin (BNB): Cargando...</p>
+        <p id="solana-price" class="crypto-price">Solana (SOL): Cargando...</p>
+        <p id="ripple-price" class="crypto-price">Ripple (XRP): Cargando...</p>
+        <p id="polygon-price" class="crypto-price">Polygon (POL): Cargando...</p>
+        <p id="cardano-price" class="crypto-price">Cardano (ADA): Cargando...</p>
+        <p id="toncoin-price" class="crypto-price">Toncoin (TON): Cargando...</p>
+        <p id="stellar-price" class="crypto-price">Stellar (XLM): Cargando...</p>
+        <p id="usdcoin-price" class="crypto-price">USD Coin (USDC): Cargando...</p>
+        <p id="monero-price" class="crypto-price">Monero (XMR): Cargando...</p>
+        <p id="taraxa-price" class="crypto-price">Taraxa (TARA): Cargando...</p>
+        <p id="pepe-price" class="crypto-price">Pepe (PEPE): Cargando...</p>
+        <p id="official-trump-price" class="crypto-price">Official Trump (TRUMP): Cargando...</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
